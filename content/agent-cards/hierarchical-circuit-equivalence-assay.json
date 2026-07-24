@@ -1,0 +1,165 @@
+{
+  "name": "Hierarchical Circuit Equivalence Assay",
+  "description": "Independently assays whether a bounded hierarchical FOUR circuit's declared behavior is its children’s least-fixed-point composition and whether every sovereign occurrence is populated.",
+  "supportedInterfaces": [
+    {
+      "url": "${BASE_URL}/a2a/jsonrpc",
+      "protocolBinding": "JSONRPC",
+      "tenant": "",
+      "protocolVersion": "1.0"
+    },
+    {
+      "url": "${BASE_URL}/a2a/rest",
+      "protocolBinding": "HTTP+JSON",
+      "tenant": "",
+      "protocolVersion": "1.0"
+    }
+  ],
+  "provider": {
+    "url": "https://emsenn.net/",
+    "organization": "Hierarchical Circuit Equivalence Assay"
+  },
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "extensions": [
+      {
+        "uri": "ni:///sha-256;wzh-zYeFQCsh4zAzGS34uacNV4qJeIEmCKIUUWyRZ-M",
+        "description": "Sovereign M1 black-box equivalence-assay interface inhabited by this endpoint.",
+        "required": true,
+        "params": {
+          "profile": "org.emsenn.rmn.sovereign-circuit-interface.v1",
+          "account": "eip155:31337:0xeab9a6b8a96342b12d0bf97adfe2cc8a329e3931",
+          "authority": "ni:///sha-256;5M0nw1YFB9wnEll_wAAFOPtXZzSGPL7n4pjbpeZKtFw",
+          "custody": "ni:///sha-256;79ZV0MwsJIQgKnTw4qZbpkcDqqFW8TzQY8oLqxMGjdM",
+          "territory": "ni:///sha-256;cZnPX4NVIN432Y1Fce-1LP43DYh6uFYdd_cTzH72wng",
+          "component": {
+            "profile": "org.emsenn.rmn.hierarchical-circuit.v3",
+            "law": "ni:///sha-256;Pqj9zlJtORf6nY0EbMSHrKjyxLa5wuK8uuvMTcb619I",
+            "ports": [
+              {
+                "name": "request",
+                "direction": "input",
+                "predicate": "ni:///sha-256;EH5jIxxtAhkZ6nQ0xUuW5VMC7rmzc7QF6Hz1RqgEgi0",
+                "carrier": "ni:///sha-256;Erog5mmrXtldXgQa4DLKA80lkRVeJVvYDSGygM1FlzA",
+                "mode": "tensor"
+              },
+              {
+                "name": "receipt",
+                "direction": "output",
+                "predicate": "ni:///sha-256;V5I-zm-gjVmsBTLfdZEztWPZXAd7EyfXb_pPuN9vcCg",
+                "carrier": "ni:///sha-256;Erog5mmrXtldXgQa4DLKA80lkRVeJVvYDSGygM1FlzA",
+                "mode": "tensor"
+              }
+            ],
+            "instances": [],
+            "nets": [],
+            "behavior": {
+              "factors": [
+                {
+                  "inputs": [
+                    "request"
+                  ],
+                  "outputs": [
+                    "receipt"
+                  ],
+                  "rows": [
+                    {
+                      "input": [
+                        {
+                          "positiveEvidence": false,
+                          "negativeEvidence": false
+                        }
+                      ],
+                      "output": [
+                        {
+                          "positiveEvidence": false,
+                          "negativeEvidence": false
+                        }
+                      ]
+                    },
+                    {
+                      "input": [
+                        {
+                          "positiveEvidence": true,
+                          "negativeEvidence": false
+                        }
+                      ],
+                      "output": [
+                        {
+                          "positiveEvidence": true,
+                          "negativeEvidence": false
+                        }
+                      ]
+                    },
+                    {
+                      "input": [
+                        {
+                          "positiveEvidence": false,
+                          "negativeEvidence": true
+                        }
+                      ],
+                      "output": [
+                        {
+                          "positiveEvidence": false,
+                          "negativeEvidence": true
+                        }
+                      ]
+                    },
+                    {
+                      "input": [
+                        {
+                          "positiveEvidence": true,
+                          "negativeEvidence": true
+                        }
+                      ],
+                      "output": [
+                        {
+                          "positiveEvidence": true,
+                          "negativeEvidence": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "extendedAgentCard": false
+  },
+  "securitySchemes": {},
+  "securityRequirements": [],
+  "defaultInputModes": [
+    "application/rmn+cbor"
+  ],
+  "defaultOutputModes": [
+    "application/rmn+cbor"
+  ],
+  "skills": [
+    {
+      "id": "assay-hierarchical-circuit-equivalence",
+      "name": "Assay hierarchical circuit equivalence",
+      "description": "Computes bounded least-fixed-point FOUR behavior from child black boxes, compares it with the declared parent, and verifies total sovereign occurrence placement.",
+      "tags": [
+        "obsmetrologia",
+        "rmn",
+        "four",
+        "equivalence",
+        "circuit"
+      ],
+      "examples": [],
+      "inputModes": [
+        "application/rmn+cbor"
+      ],
+      "outputModes": [
+        "application/rmn+cbor"
+      ],
+      "securityRequirements": []
+    }
+  ],
+  "signatures": []
+}

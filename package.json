@@ -1,0 +1,53 @@
+{
+  "name": "@emsenn/hierarchical-circuit-equivalence-assay",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Independent bounded FOUR hierarchical-circuit behavior and sovereign-assembly equivalence assay die.",
+  "exports": {
+    ".": "./src/assay.mjs",
+    "./client": "./src/client.mjs",
+    "./law": "./src/law.mjs"
+  },
+  "bin": {
+    "serve-hierarchical-circuit-equivalence-assay-a2a": "./bin/server.mjs"
+  },
+  "scripts": {
+    "check": "node --check src/assay.mjs && node --check src/client.mjs && node --check src/law.mjs && node --check bin/execute-a2a-task.mjs && node --check bin/server.mjs",
+    "test": "node --test test/*.test.mjs",
+    "verify": "npm run check && npm test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@a2a-js/sdk": "1.0.0-beta.0",
+    "@emsenn/a2a-contracted-agent-service": "file:../../../../../red-cup-engineering/services/web-services-section/services/a2a-services-section/services/a2a-contracted-agent-service",
+    "@emsenn/a2a-rmn-part-service": "file:../../../../../red-cup-engineering/services/web-services-section/services/a2a-services-section/services/a2a-rmn-part-service",
+    "@emsenn/a2a-rmn-task-client-service": "file:../../../../../red-cup-engineering/services/web-services-section/services/a2a-services-section/services/a2a-rmn-task-client-service",
+    "@emsenn/rmn-semantic-conformance": "file:../rmn-semantic-conformance",
+    "@emsenn/rwil-rdf-services": "file:../rwil-rdf-services"
+  },
+  "x-agentic-metro-enterprise": {
+    "node-id": "hierarchical-circuit-equivalence-assay",
+    "actor": "urn:ame:hierarchical-circuit-equivalence-assay",
+    "organizational-kind": "micro-enterprise",
+    "owners": [
+      "obsmetrological-services-section"
+    ],
+    "membrane": {
+      "law": "lib/",
+      "lasting-instances": "content/",
+      "append-only-instances": "data/"
+    },
+    "admission": "one exact canonical hierarchical FOUR circuit family and sovereign occurrence assembly",
+    "refusal": "topology synthesis, material access, execution, tracing, customer acceptance, arbitrary RMN normalization, or fallback assay",
+    "operation-catalog": {
+      "assay-hierarchical-circuit-equivalence": {
+        "contract": "ni:///sha-256;Pqj9zlJtORf6nY0EbMSHrKjyxLa5wuK8uuvMTcb619I",
+        "protocol": "A2A 1.0",
+        "legacyCompatibility": false
+      }
+    }
+  }
+}

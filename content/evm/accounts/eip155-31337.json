@@ -1,0 +1,28 @@
+{
+  "profile": "org.emsenn.evm.sovereign-enterprise-account.v3",
+  "enterprise": {
+    "nodeId": "hierarchical-circuit-equivalence-assay",
+    "urn": "urn:ame:hierarchical-circuit-equivalence-assay",
+    "enterpriseId": "0x6096c596d0262a166d4956806ba86417d2fefc4aa92e88511e80e41aadbe5fd7"
+  },
+  "chain": {
+    "chainId": 31337,
+    "caip2": "eip155:31337"
+  },
+  "account": {
+    "address": "0xeab9a6b8a96342b12d0bf97adfe2cc8a329e3931",
+    "caip10": "eip155:31337:0xeab9a6b8a96342b12d0bf97adfe2cc8a329e3931"
+  },
+  "factory": {
+    "address": "0x7bf3cf1176c4a037d3ea2a5ff3d480359ac65ecd",
+    "userSalt": "0x379f8be87fe415485b6907c1419eb73d994b63b731daa981c7fd18bccf9df645"
+  },
+  "policy": {
+    "signer": "0xb8b94e63a686e2a54180b8b73f2ccf950b4cd1f3",
+    "custody": "settlement-private"
+  },
+  "deployment": {
+    "transaction": "0xdc3d37cc42fe4374a031c97f3531955b5a68f1da3e63214931690033ee3d6970",
+    "block": 1501
+  }
+}

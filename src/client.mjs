@@ -1,0 +1,27 @@
+import { randomUUID } from "node:crypto";
+import { Message, Role } from "@a2a-js/sdk";
+import { a2aResultParts, sendRmnTask } from "@emsenn/a2a-rmn-task-client-service";
+import { extractRmnPart, rmnPart } from "@emsenn/a2a-rmn-part-service";
+import { checkTerm, decodeSemantic, semanticBytes, semanticId } from "@emsenn/rmn-semantic-conformance";
+import { circuitInterfaceFromAgentCard, SOVEREIGN_CIRCUIT_INTERFACE_EXTENSION } from "@emsenn/rmn-semantic-conformance/hierarchical-circuit";
+import { decodeEquivalenceAssayReceipt, encodeEquivalenceAssayRequest } from "./assay.mjs";
+
+const parts = a2aResultParts;
+
+export async function requestHierarchicalCircuitEquivalence({ agentUrl, circuit, components = [], assembly, signal, send = sendRmnTask }) {
+  const request = encodeEquivalenceAssayRequest({ circuit, components, assembly });
+  const requestValue = request.value ?? { kind: "HierarchicalCircuitAssayRequest", circuit, components, assembly };
+  const canonicalRequest = encodeEquivalenceAssayRequest(requestValue);
+  const document = ["ascribe", canonicalRequest.type, canonicalRequest.term];
+  const message = Message.toJSON({ messageId: randomUUID(), contextId: "", taskId: "", role: Role.ROLE_USER, parts: [rmnPart(semanticBytes(document), "hierarchical-circuit-equivalence-request.rmn.cbor")], metadata: {}, extensions: [], referenceTaskIds: [] });
+  const exchange = await send({ agentUrl, extensions: [SOVEREIGN_CIRCUIT_INTERFACE_EXTENSION], message, requireSignature: true, ...(signal ? { signal } : {}) });
+  const output = extractRmnPart(parts(exchange.result)), response = decodeSemantic(output.bytes);
+  if (!semanticBytes(response).equals(output.bytes) || response?.[0] !== "ascribe" || response.length !== 3) throw new Error("equivalence provider returned noncanonical RMN");
+  checkTerm(response[2], response[1]);
+  const receipt = decodeEquivalenceAssayReceipt(response[1], response[2]), provider = circuitInterfaceFromAgentCard(exchange.agentCard);
+  if (receipt.provider !== provider.account) throw new Error("equivalence receipt provider does not own the signed Agent Card");
+  const expectedRequest = semanticId(document);
+  if (receipt.request !== expectedRequest) throw new Error("equivalence receipt does not bind the exact request");
+  return { receipt, receiptNi: semanticId(response), response, exchange };
+}
+
