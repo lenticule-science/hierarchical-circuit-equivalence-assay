@@ -1,10 +1,10 @@
-import { semanticBytes, semanticId } from "@emsenn/rmn-semantic-conformance";
+import { semanticBytes, semanticId } from "@red-cup-engineering/rmn-semantic-conformance";
 import {
   assayHierarchicalCircuitRequest,
   decodeCircuitAssayReceipt,
   encodeCircuitAssayRequest,
-} from "@emsenn/rmn-semantic-conformance/hierarchical-circuit";
-import { decodeRelationalValue, encodeRelationalValue, RELATIONAL_VALUE_TYPE } from "@emsenn/rmn-semantic-conformance/relational-value";
+} from "@red-cup-engineering/rmn-semantic-conformance/hierarchical-circuit";
+import { decodeRelationalValue, encodeRelationalValue, RELATIONAL_VALUE_TYPE } from "@red-cup-engineering/rmn-semantic-conformance/relational-value";
 
 export const EQUIVALENCE_ASSAY_PROFILE = "org.emsenn.infomaterial.hierarchical-circuit-equivalence-assay.v1";
 export const PROVIDER_ACCOUNT = "eip155:31337:0xeab9a6b8a96342b12d0bf97adfe2cc8a329e3931";

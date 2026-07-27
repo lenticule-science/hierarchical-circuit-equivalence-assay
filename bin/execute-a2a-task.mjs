@@ -4,9 +4,9 @@ import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { Message, Role } from "@a2a-js/sdk";
-import { extractRmnPart, rmnPart } from "@emsenn/a2a-rmn-part-service";
-import { checkTerm, decodeSemantic, semanticBytes } from "@emsenn/rmn-semantic-conformance";
-import { createSettlementStore } from "@emsenn/rwil-rdf-services/client";
+import { extractRmnPart, rmnPart } from "@red-cup-engineering/a2a-rmn-part-service";
+import { checkTerm, decodeSemantic, semanticBytes } from "@red-cup-engineering/rmn-semantic-conformance";
+import { createSettlementStore } from "@lenticule-science/rwil-rdf-projection-service/client";
 import { assayHierarchicalCircuitEquivalence, decodeEquivalenceAssayRequest } from "../src/assay.mjs";
 import { HIERARCHICAL_CIRCUIT_EQUIVALENCE_LAW } from "../src/law.mjs";
 
@@ -19,7 +19,7 @@ export async function executeA2aMessage(source, env = process.env) {
   if (!semanticBytes(request).equals(input.bytes) || request?.[0] !== "ascribe" || request.length !== 3) throw new Error("equivalence request must be canonical typed RMN CBOR");
   checkTerm(request[2], request[1]);
   const result = assayHierarchicalCircuitEquivalence(decodeEquivalenceAssayRequest(request[1], request[2])), recordedAt = new Date().toISOString();
-  const store = createSettlementStore({ settlementRoot: ROOT, dataRoot: resolve(ROOT, "data"), agentUrl: env.RWIL_RDF_AGENT });
+  const store = createSettlementStore({ settlementRoot: ROOT, agentUrl: env.RWIL_RDF_AGENT });
   await store.record({ category: "hierarchical-circuit-equivalence-assay.receipt", recordedAt, record: { ...result.receipt, semanticId: result.semanticId, law: HIERARCHICAL_CIRCUIT_EQUIVALENCE_LAW.id } });
   return Message.toJSON({ messageId: randomUUID(), contextId: message.contextId, taskId: message.taskId, role: Role.ROLE_AGENT, parts: [rmnPart(result.canonicalBytes, "hierarchical-circuit-equivalence-receipt.rmn.cbor")], metadata: { disposition: "conformant", receiptNi: result.semanticId, circuitNi: result.receipt.circuit, assemblyNi: result.receipt.assembly }, extensions: [], referenceTaskIds: [] });
 }
