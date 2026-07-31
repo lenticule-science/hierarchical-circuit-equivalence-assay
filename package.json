@@ -25,47 +25,7 @@
     "@red-cup-engineering/a2a-contracted-agent-service": "2.0.4",
     "@red-cup-engineering/a2a-rmn-part-service": "1.0.0",
     "@red-cup-engineering/a2a-rmn-task-client-service": "1.1.0",
-    "@red-cup-engineering/rmn-semantic-conformance": "6.0.0",
+    "@red-cup-engineering/rmn-semantic-conformance": "6.0.1",
     "@lenticule-science/rwil-rdf-projection-service": "1.0.2"
-  },
-  "x-agentic-metro-enterprise": {
-    "node-id": "hierarchical-circuit-equivalence-assay",
-    "actor": "urn:ame:hierarchical-circuit-equivalence-assay",
-    "organizational-kind": "micro-enterprise",
-    "owners": [
-      "obsmetrological-services-section"
-    ],
-    "membrane": {
-      "law": "lib/",
-      "lasting-instances": "content/",
-      "append-only-instances": "data/"
-    },
-    "admission": "one exact canonical hierarchical FOUR circuit family and sovereign occurrence assembly",
-    "refusal": "topology synthesis, material access, execution, tracing, customer acceptance, arbitrary RMN normalization, or fallback assay",
-    "operation-catalog": {
-      "assay-hierarchical-circuit-equivalence": {
-        "contract": "ni:///sha-256;Pqj9zlJtORf6nY0EbMSHrKjyxLa5wuK8uuvMTcb619I",
-        "protocol": "A2A 1.0",
-        "legacyCompatibility": false
-      }
-    }
-  },
-  "x-semiotic-voxel": {
-    "profile": "org.harmonious-union.semiotic-voxel.v1",
-    "owner": "lenticule-science",
-    "kind": "actor",
-    "actor": "urn:ame:hierarchical-circuit-equivalence-assay",
-    "operations": [
-      "assay-hierarchical-circuit-equivalence"
-    ],
-    "capabilities": [
-      {
-        "capability": "hierarchical-circuit-equivalence-assay",
-        "faces": [
-          "assay-hierarchical-circuit-equivalence"
-        ]
-      }
-    ],
-    "package": "@lenticule-science/hierarchical-circuit-equivalence-assay"
   }
 }

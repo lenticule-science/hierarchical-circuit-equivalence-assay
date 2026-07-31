@@ -1,6 +1,6 @@
 {
   "name": "Hierarchical Circuit Equivalence Assay",
-  "description": "Independently assays whether a bounded hierarchical FOUR circuit's declared behavior is its children’s least-fixed-point composition and whether every sovereign occurrence is populated.",
+  "description": "Assays with exact attribution and replay evidence whether a bounded hierarchical FOUR circuit's declared behavior is its children’s least-fixed-point composition and whether every sovereign occurrence is populated; producer identity neither proves nor disproves correctness.",
   "supportedInterfaces": [
     {
       "url": "${BASE_URL}/a2a/jsonrpc",
