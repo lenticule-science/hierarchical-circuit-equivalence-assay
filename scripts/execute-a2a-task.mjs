@@ -14,12 +14,12 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 export async function executeA2aMessage(source, env = process.env) {
   const message = Message.fromJSON(source);
   if (message.role !== Role.ROLE_USER) throw new Error("equivalence assay requires an A2A ROLE_USER message");
-  if (!env.RWIL_RDF_AGENT) throw new Error("RWIL_RDF_AGENT is required; the assay cannot keep an ambient book");
+  if (!env.WITNESS_JOURNAL_RDF_AGENT) throw new Error("WITNESS_JOURNAL_RDF_AGENT is required; the assay cannot keep an ambient book");
   const input = extractRmnPart(message.parts), request = decodeSemantic(input.bytes);
   if (!semanticBytes(request).equals(input.bytes) || request?.[0] !== "ascribe" || request.length !== 3) throw new Error("equivalence request must be canonical typed RMN CBOR");
   checkTerm(request[2], request[1]);
   const result = assayHierarchicalCircuitEquivalence(decodeEquivalenceAssayRequest(request[1], request[2])), recordedAt = new Date().toISOString();
-  const store = createSettlementStore({ settlementRoot: ROOT, agentUrl: env.RWIL_RDF_AGENT });
+  const store = createSettlementStore({ settlementRoot: ROOT, agentUrl: env.WITNESS_JOURNAL_RDF_AGENT });
   await store.record({ category: "hierarchical-circuit-equivalence-assay.receipt", recordedAt, record: { ...result.receipt, semanticId: result.semanticId, law: HIERARCHICAL_CIRCUIT_EQUIVALENCE_LAW.id } });
   return Message.toJSON({ messageId: randomUUID(), contextId: message.contextId, taskId: message.taskId, role: Role.ROLE_AGENT, parts: [rmnPart(result.canonicalBytes, "hierarchical-circuit-equivalence-receipt.rmn.cbor")], metadata: { disposition: "conformant", receiptNi: result.semanticId, circuitNi: result.receipt.circuit, assemblyNi: result.receipt.assembly }, extensions: [], referenceTaskIds: [] });
 }
