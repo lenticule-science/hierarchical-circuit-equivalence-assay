@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { semanticId } from "@red-cup-engineering/rmn-semantic-conformance";
-import { CIRCUIT_ASSEMBLY_PROFILE, HIERARCHICAL_CIRCUIT_PROFILE, circuitAssemblyId, hierarchicalCircuitId } from "@red-cup-engineering/rmn-semantic-conformance/hierarchical-circuit";
+import { semanticId } from "@red-cup-engineering/relation-model-notation-runtime";
+import { CIRCUIT_ASSEMBLY_PROFILE, HIERARCHICAL_CIRCUIT_PROFILE, circuitAssemblyId, hierarchicalCircuitId } from "@red-cup-engineering/relation-model-notation-runtime/hierarchical-circuit";
 import { assayHierarchicalCircuitEquivalence, decodeEquivalenceAssayReceipt, PROVIDER_ACCOUNT } from "../src/assay.mjs";
-import { decodeSemantic } from "@red-cup-engineering/rmn-semantic-conformance";
+import { decodeSemantic } from "@red-cup-engineering/relation-model-notation-runtime";
 
 const N = { positiveEvidence: false, negativeEvidence: false }, T = { positiveEvidence: true, negativeEvidence: false }, F = { positiveEvidence: false, negativeEvidence: true }, B = { positiveEvidence: true, negativeEvidence: true };
 const values = [N, T, F, B], id = (label) => semanticId(["mark", label]);
