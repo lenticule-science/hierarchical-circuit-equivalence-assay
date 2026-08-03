@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { semanticId } from "@red-cup-engineering/relation-model-notation-runtime";
+import { jsonId } from "../src/semantic-identity.mjs";
 import { CIRCUIT_ASSEMBLY_PROFILE, HIERARCHICAL_CIRCUIT_PROFILE, circuitAssemblyId, hierarchicalCircuitId } from "@red-cup-engineering/relation-model-notation-runtime/hierarchical-circuit";
 import { assayHierarchicalCircuitEquivalence, decodeEquivalenceAssayReceipt, PROVIDER_ACCOUNT } from "../src/assay.mjs";
 import { decodeSemantic } from "@red-cup-engineering/relation-model-notation-runtime";
 
 const N = { positiveEvidence: false, negativeEvidence: false }, T = { positiveEvidence: true, negativeEvidence: false }, F = { positiveEvidence: false, negativeEvidence: true }, B = { positiveEvidence: true, negativeEvidence: true };
-const values = [N, T, F, B], id = (label) => semanticId(["mark", label]);
+const values = [N, T, F, B], id = (label) => jsonId(["mark", label], "lenticule.hierarchical-circuit-equivalence.test-mark");
 const rows = (outputs = values) => values.map((input, index) => ({ input: [input], output: [outputs[index]] }));
 const pin = (name, direction) => ({ name, direction, mode: "tensor", predicate: id("evidences"), carrier: id("FOUR") });
 const membrane = (suffix) => ({ account: `eip155:31337:0x${suffix.padStart(40, "0")}`, authority: id(`authority-${suffix}`), custody: id(`custody-${suffix}`), territory: id(`territory-${suffix}`) });

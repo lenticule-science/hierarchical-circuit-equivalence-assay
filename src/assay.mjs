@@ -1,10 +1,11 @@
-import { semanticBytes, semanticId } from "@red-cup-engineering/relation-model-notation-runtime";
+import { semanticBytes } from "@red-cup-engineering/relation-model-notation-runtime";
 import {
   assayHierarchicalCircuitRequest,
   decodeCircuitAssayReceipt,
   encodeCircuitAssayRequest,
 } from "@red-cup-engineering/relation-model-notation-runtime/hierarchical-circuit";
 import { decodeRelationalValue, encodeRelationalValue, RELATIONAL_VALUE_TYPE } from "@red-cup-engineering/relation-model-notation-runtime/relational-value";
+import { jsonId } from "./semantic-identity.mjs";
 
 export const EQUIVALENCE_ASSAY_PROFILE = "org.emsenn.infomaterial.hierarchical-circuit-equivalence-assay.v1";
 export const PROVIDER_ACCOUNT = "eip155:31337:0xeab9a6b8a96342b12d0bf97adfe2cc8a329e3931";
@@ -12,7 +13,7 @@ export const PROVIDER_ACCOUNT = "eip155:31337:0xeab9a6b8a96342b12d0bf97adfe2cc8a
 const NI = /^ni:\/\/\/sha-256;[A-Za-z0-9_-]{43}$/u;
 function fail(code, message) { const error = new Error(message); error.code = code; throw error; }
 function exactKeys(value, keys) { return value && Object.getPrototypeOf(value) === Object.prototype && Object.keys(value).sort().join("\0") === [...keys].sort().join("\0"); }
-function typed(value) { const encoded = encodeRelationalValue(value), term = ["ascribe", encoded.type, encoded.term]; return { id: semanticId(term), bytes: semanticBytes(term), type: encoded.type, term: encoded.term }; }
+function typed(value, objectKind) { const encoded = encodeRelationalValue(value), term = ["ascribe", encoded.type, encoded.term]; return { id: jsonId(term, objectKind), bytes: semanticBytes(term), type: encoded.type, term: encoded.term }; }
 
 export function encodeEquivalenceAssayRequest(source) { return encodeCircuitAssayRequest(source); }
 export function decodeEquivalenceAssayRequest(type, term) {
@@ -25,7 +26,7 @@ export function assayHierarchicalCircuitEquivalence(source) {
   const request = encodeCircuitAssayRequest(source).value;
   const result = assayHierarchicalCircuitRequest(request);
   const kernelReceipt = decodeCircuitAssayReceipt(result.type, result.term);
-  const requestDocument = typed(request);
+  const requestDocument = typed(request, "lenticule.hierarchical-circuit-equivalence.request");
   const receipt = {
     kind: "HierarchicalCircuitEquivalenceReceipt",
     profile: EQUIVALENCE_ASSAY_PROFILE,
@@ -37,7 +38,7 @@ export function assayHierarchicalCircuitEquivalence(source) {
     components: kernelReceipt.components,
     equivalent: true,
   };
-  const document = typed(receipt);
+  const document = typed(receipt, "lenticule.hierarchical-circuit-equivalence.receipt");
   return { receipt, semanticId: document.id, canonicalBytes: document.bytes, type: document.type, term: document.term };
 }
 

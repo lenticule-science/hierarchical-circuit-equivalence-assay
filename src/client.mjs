@@ -2,9 +2,10 @@ import { randomUUID } from "node:crypto";
 import { Message, Role } from "@a2a-js/sdk";
 import { a2aResultParts, sendRmnTask } from "@red-cup-engineering/a2a-rmn-task-client-service";
 import { extractRmnPart, rmnPart } from "@red-cup-engineering/a2a-rmn-part-service";
-import { checkTerm, decodeSemantic, semanticBytes, semanticId } from "@red-cup-engineering/relation-model-notation-runtime";
+import { checkTerm, decodeSemantic, semanticBytes } from "@red-cup-engineering/relation-model-notation-runtime";
 import { circuitInterfaceFromAgentCard, SOVEREIGN_CIRCUIT_INTERFACE_EXTENSION } from "@red-cup-engineering/relation-model-notation-runtime/hierarchical-circuit";
 import { decodeEquivalenceAssayReceipt, encodeEquivalenceAssayRequest } from "./assay.mjs";
+import { jsonId } from "./semantic-identity.mjs";
 
 const parts = a2aResultParts;
 
@@ -20,8 +21,7 @@ export async function requestHierarchicalCircuitEquivalence({ agentUrl, circuit,
   checkTerm(response[2], response[1]);
   const receipt = decodeEquivalenceAssayReceipt(response[1], response[2]), provider = circuitInterfaceFromAgentCard(exchange.agentCard);
   if (receipt.provider !== provider.account) throw new Error("equivalence receipt provider does not own the signed Agent Card");
-  const expectedRequest = semanticId(document);
+  const expectedRequest = jsonId(document, "lenticule.hierarchical-circuit-equivalence.request");
   if (receipt.request !== expectedRequest) throw new Error("equivalence receipt does not bind the exact request");
-  return { receipt, receiptNi: semanticId(response), response, exchange };
+  return { receipt, receiptNi: jsonId(response, "lenticule.hierarchical-circuit-equivalence.receipt"), response, exchange };
 }
-
