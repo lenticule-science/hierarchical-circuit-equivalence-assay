@@ -1,1 +1,1 @@
-{"keys":[{"crv":"Ed25519","x":"HM4lEGyksCQAGFYqZMrxMc11trxXwO7i4sLZ9nGfimc","kty":"OKP","kid":"hierarchical-circuit-equivalence-assay-ed25519","alg":"EdDSA","use":"sig"}]}
+{"keys":[{"crv":"Ed25519","x":"uEiGyu8lvwiYdzJ_C7XEEUu4-ntCTAegbnqdxzWyp5k","kty":"OKP","kid":"hierarchical-circuit-equivalence-assay-ed25519-2026-10-21","alg":"EdDSA","use":"sig"}]}
